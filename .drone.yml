@@ -1,0 +1,44 @@
+kind: pipeline
+name: case cloud demo
+
+steps:
+  - name: test
+    image: openjdk:8-jdk-alpine
+    volumes:
+      - name: maven-cache
+        path: /root/.m2
+    commands:
+      - sleep 15
+      - chmod +x ./mvnw && ./mvnw test -Dspring.profiles.active=droneCI && ./mvnw clean package -Dspring.profiles.active=droneCI
+    when:
+      branch:
+        - master
+        - master-*
+        - dev
+        - fix-*
+
+
+  - name: docker
+    image: plugins/docker
+    settings:
+      username: tanxiao@1112955140136154
+      password: 1234512345qwe
+      repo: registry.cn-shanghai.aliyuncs.com/casecloud/backend-demo
+      registry: registry.cn-shanghai.aliyuncs.com
+      tags:
+        - v1.0.1
+    when:
+      branch:
+        - master-*
+services:
+  - name: mongo
+    image: mongo:3.4
+    command: [ --smallfiles ]
+    ports:
+      - 27017
+  - name: redis
+    image: redis
+volumes:
+  - name: maven-cache
+    host:
+      path: /maven-cache
