@@ -10,7 +10,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @NoArgsConstructor
 @AllArgsConstructor
 public class TraderUser {
-    private Long id;
+    private Long id; // phone
     private String traderName;
     private String password;
     private Long traderId;
