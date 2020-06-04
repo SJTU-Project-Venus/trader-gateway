@@ -1,5 +1,5 @@
 kind: pipeline
-name: case cloud demo
+name: trader-gateway
 
 steps:
   - name: test
@@ -15,21 +15,20 @@ steps:
         - master
         - master-*
         - dev
-        - fix-*
 
 
   - name: docker
     image: plugins/docker
     settings:
-      username: tanxiao@1112955140136154
-      password: 1234512345qwe
-      repo: registry.cn-shanghai.aliyuncs.com/casecloud/backend-demo
-      registry: registry.cn-shanghai.aliyuncs.com
+      username: wwwumr
+      password: wang19990702
+      repo: wwwumr/trader-gateway
       tags:
         - v1.0.1
     when:
       branch:
         - master-*
+
 services:
   - name: mongo
     image: mongo:3.4
@@ -38,6 +37,7 @@ services:
       - 27017
   - name: redis
     image: redis
+
 volumes:
   - name: maven-cache
     host:

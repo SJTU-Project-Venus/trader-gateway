@@ -9,11 +9,11 @@
     <version>2.2.4.RELEASE</version>
     <relativePath/> <!-- lookup parent from repository -->
   </parent>
-  <groupId>ty0207.example</groupId>
-  <artifactId>demo</artifactId>
+  <groupId>awesome.example</groupId>
+  <artifactId>trader-gateway</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <name>casecloud-backend-demo</name>
-  <description>Demo project for casecloud</description>
+  <name>trader-gateway</name>
+  <description>Trader Gateway</description>
 
   <properties>
     <java.version>1.8</java.version>
