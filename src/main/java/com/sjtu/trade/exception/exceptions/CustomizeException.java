@@ -11,4 +11,11 @@ public class CustomizeException extends RuntimeException {
     this.code = code;
   }
 
+  public HttpStatus getCode() {
+    return code;
+  }
+
+  public void setCode(HttpStatus code) {
+    this.code = code;
+  }
 }

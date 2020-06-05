@@ -1,25 +1,41 @@
 package com.sjtu.trade.controller;
 
-import com.sjtu.trade.service.OrderBlotterService;
+import com.sjtu.trade.dto.NameDTO;
+import com.sjtu.trade.dto.OrderBlotterDTO;
+import com.sjtu.trade.entity.OrderBlotter;
 import com.sjtu.trade.service.OrderBookService;
+import com.sjtu.trade.serviceimpl.OrderBlotterService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.simp.annotation.SendToUser;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.util.HtmlUtils;
+
+import java.security.Principal;
 
 @RestController
-@RequestMapping("/orderBlotter")
+@Controller
 public class OrderBlotterController {
-    @Autowired
-    private OrderBlotterService orderBlotterService;
 
-    @ApiOperation(value = "用户查看Market Depth", notes = "通过futureId")
-    @RequestMapping(value = "/all", method = { RequestMethod.GET, RequestMethod.OPTIONS }, produces = "application/json;charset=UTF-8")
-    public ResponseEntity<?> login() {
-        return ResponseEntity.status(HttpStatus.OK).body(orderBlotterService.AllOrderBlotter());
+    private final OrderBlotterService orderBlotterService;
+
+    OrderBlotterController(OrderBlotterService orderBlotterService) {
+        this.orderBlotterService = orderBlotterService;
     }
+
+    @MessageMapping("/orderBlotter")
+    @SendToUser("/topic/orderBlotter")
+    public String greeting(OrderBlotterDTO message, Principal principal) throws Exception {
+        System.out.print("Received greeting message "+ message.getFutureId() +" from "+principal.getName());
+        orderBlotterService.addUsers(new NameDTO(principal.getName(),message.getFutureId()));
+        Thread.sleep(1000); // simulated delay
+        return "Hello, " + HtmlUtils.htmlEscape(message.getFutureId().toString()) + "!";
+    }
+
 }
