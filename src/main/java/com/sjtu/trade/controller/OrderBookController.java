@@ -1,13 +1,20 @@
 package com.sjtu.trade.controller;
 
 import com.sjtu.trade.dto.LoginRequest;
-import com.sjtu.trade.entity.TraderUser;
-import com.sjtu.trade.service.OrderBookService;
+import com.sjtu.trade.dto.NameDTO;
+import com.sjtu.trade.dto.OrderBlotterDTO;
+import com.sjtu.trade.serviceimpl.OrderBlotterService;
+import com.sjtu.trade.serviceimpl.OrderBookService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.simp.annotation.SendToUser;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.HtmlUtils;
+
+import java.security.Principal;
 
 @RestController
 @RequestMapping("/orderBook")
@@ -16,9 +23,20 @@ public class OrderBookController {
     @Autowired
     private OrderBookService orderBookService;
 
-    @ApiOperation(value = "用户查看Market Depth", notes = "通过futureId")
-    @RequestMapping(value = "/marketDepth/{id}", method = { RequestMethod.GET, RequestMethod.OPTIONS }, produces = "application/json;charset=UTF-8")
-    public ResponseEntity<?> login(@PathVariable("id")Long id) {
-        return ResponseEntity.status(HttpStatus.OK).body(orderBookService.findMarketDepth(id));
+    private final OrderBlotterService orderBlotterService;
+
+    OrderBookController(OrderBlotterService orderBlotterService) {
+        this.orderBlotterService = orderBlotterService;
     }
+
+    @ApiOperation(value = "用户查看Market Depth")
+    @MessageMapping("/orderBook")
+    @SendToUser("/topic/orderBook")
+    public String greeting(OrderBlotterDTO message, Principal principal) throws Exception {
+        System.out.print("Received greeting message "+ message.getFutureId() +" from "+principal.getName());
+        orderBlotterService.addUsers(new NameDTO(principal.getName(),message.getFutureId()));
+        Thread.sleep(1000); // simulated delay
+        return "Hello, " + HtmlUtils.htmlEscape(message.getFutureId().toString()) + "!";
+    }
+
 }

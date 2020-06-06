@@ -1,20 +1,16 @@
 package com.sjtu.trade.controller;
 
+import com.sjtu.trade.dto.LoginRequest;
 import com.sjtu.trade.dto.NameDTO;
 import com.sjtu.trade.dto.OrderBlotterDTO;
-import com.sjtu.trade.entity.OrderBlotter;
-import com.sjtu.trade.service.OrderBookService;
 import com.sjtu.trade.serviceimpl.OrderBlotterService;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.annotation.SendToUser;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.HtmlUtils;
 
 import java.security.Principal;
@@ -36,6 +32,11 @@ public class OrderBlotterController {
         orderBlotterService.addUsers(new NameDTO(principal.getName(),message.getFutureId()));
         Thread.sleep(1000); // simulated delay
         return "Hello, " + HtmlUtils.htmlEscape(message.getFutureId().toString()) + "!";
+    }
+    @ApiOperation(value = "用户登录", notes = "通过用户账号密码进行登录")
+    @RequestMapping(value = "/user/{id}", method = { RequestMethod.GET, RequestMethod.OPTIONS }, produces = "application/json;charset=UTF-8")
+    public ResponseEntity<?> login(@PathVariable Long id) {
+        return ResponseEntity.status(HttpStatus.OK).body(orderBlotterService.findByUserId(id));
     }
 
 }

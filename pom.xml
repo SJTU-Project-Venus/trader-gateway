@@ -16,15 +16,39 @@
   <description>Trader Gateway</description>
 
   <properties>
+    <slf4j.version>1.7.25</slf4j.version>
     <java.version>1.8</java.version>
-    <spring.profiles.active>dev</spring.profiles.active>
   </properties>
 
+
   <dependencies>
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
+      <version>3.5</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/org.quickfixj/quickfixj-core -->
+    <dependency>
+      <groupId>org.quickfixj</groupId>
+      <artifactId>quickfixj-core</artifactId>
+      <version>2.1.1</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/org.quickfixj/quickfixj-messages-all -->
+    <dependency>
+      <groupId>org.quickfixj</groupId>
+      <artifactId>quickfixj-messages-all</artifactId>
+      <version>2.1.1</version>
+    </dependency>
+
     <dependency>
       <groupId>org.springframework.security.oauth</groupId>
       <artifactId>spring-security-oauth2</artifactId>
       <version>2.3.2.RELEASE</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-amqp</artifactId>
     </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>

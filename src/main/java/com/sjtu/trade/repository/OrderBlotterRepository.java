@@ -4,6 +4,8 @@ import com.sjtu.trade.entity.Order;
 import com.sjtu.trade.entity.OrderBlotter;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
-public interface OrderBlotterRepository extends MongoRepository<OrderBlotter, Long> {
+import java.util.List;
 
+public interface OrderBlotterRepository extends MongoRepository<OrderBlotter, Long> {
+     List<OrderBlotter> findByInitiatorId(Long id);
 }

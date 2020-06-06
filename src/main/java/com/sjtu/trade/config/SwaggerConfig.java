@@ -18,7 +18,7 @@ public class SwaggerConfig {
     return new Docket(DocumentationType.SWAGGER_2)
         .apiInfo(apiInfo())
         .select()
-        .apis(RequestHandlerSelectors.basePackage("ty0207.example.demo"))
+        .apis(RequestHandlerSelectors.basePackage("com.sjtu.trade"))
         .paths(PathSelectors.any())
         .build();
   }
