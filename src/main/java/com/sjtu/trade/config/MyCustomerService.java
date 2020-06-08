@@ -23,7 +23,7 @@ public class MyCustomerService implements UserDetailsService {
             }
             UserDetailVo userVoDetail = new UserDetailVo();
             userVoDetail.setUserId(userVo.getPhone());
-            userVoDetail.setUsername(userVo.getTraderName());
+            userVoDetail.setUsername(userVo.getPhone());
             userVoDetail.setPassword(userVo.getPassword());
             return userVoDetail;
         }

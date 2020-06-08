@@ -3,9 +3,10 @@ package com.sjtu.trade.utils;
 import org.springframework.lang.Nullable;
 
 public enum OrderType {
-    BUY(1),
-    SELL(2);
-
+    LIMIT(1),
+    STOP(2),
+    CANCEL(3),
+    MARKET(4);
     OrderType(int type) {
         this.type = type;
     }

@@ -13,16 +13,15 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class TraderUser {
     @Id
     private String phone; // phone
-    private String traderName;
     private String password;
-    private Long traderId;
+    private String traderCompony;
 
-    public Long getTraderId() {
-        return traderId;
+    public String getTraderCompony() {
+        return traderCompony;
     }
 
-    public void setTraderId(Long traderId) {
-        this.traderId = traderId;
+    public void setTraderCompony(String traderCompony) {
+        this.traderCompony = traderCompony;
     }
 
     public String getPhone() {
@@ -31,14 +30,6 @@ public class TraderUser {
 
     public void setPhone(String phone) {
         this.phone = phone;
-    }
-
-    public String getTraderName() {
-        return traderName;
-    }
-
-    public void setTraderName(String traderName) {
-        this.traderName = traderName;
     }
 
     public String getPassword() {
