@@ -33,7 +33,7 @@ public class OrderBlotterController {
         Thread.sleep(1000); // simulated delay
         return "Hello, " + HtmlUtils.htmlEscape(message.getFutureId().toString()) + "!";
     }
-    @ApiOperation(value = "用户登录", notes = "通过用户账号密码进行登录")
+    @ApiOperation(value = "用户的历史交易", notes = "通过用户账号密码进行登录")
     @RequestMapping(value = "/user/{id}", method = { RequestMethod.GET, RequestMethod.OPTIONS }, produces = "application/json;charset=UTF-8")
     public ResponseEntity<?> login(@PathVariable Long id) {
         return ResponseEntity.status(HttpStatus.OK).body(orderBlotterService.findByUserId(id));

@@ -16,8 +16,8 @@ public class TraderUserDaoImpl implements TraderUserDao {
     @Autowired
     private IDService idService;
     @Override
-    public TraderUser OneTrader(Long id){
-        return traderUserRepository.findById(id).get();
+    public TraderUser OneTrader(String id){
+        return traderUserRepository.findByPhone(id);
     }
     @Override
     public boolean CreateTraderUser(TraderUser traderUser){

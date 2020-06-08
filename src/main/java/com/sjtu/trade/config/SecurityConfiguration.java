@@ -29,14 +29,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 //                .withUser("user_2").password("123456").authorities("USER");
 //    }
 
-    @Bean
-    @Override
-    protected UserDetailsService userDetailsService(){
-        InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
-        manager.createUser(User.withUsername("user_1").password(passwordEncoder().encode("123456")).authorities("USER").build());
-        manager.createUser(User.withUsername("user_2").password(passwordEncoder().encode("123456")).authorities("USER").build());
-        return manager;
-    }
 
     /**
      * 这一步的配置是必不可少的，否则SpringBoot会自动配置一个AuthenticationManager,覆盖掉内存中的用户

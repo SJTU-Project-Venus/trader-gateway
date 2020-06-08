@@ -26,7 +26,7 @@ public class TraderUserServiceImpl implements TraderUserService {
     }
     @Override
     public boolean Register(TraderUser traderUser){
-        if(traderDao.OneTrader(traderUser.getTraderId())!=null && traderUserDao.OneTrader(traderUser.getId()) == null){
+        if(traderUserDao.OneTrader(traderUser.getPhone()) == null){
             return traderUserDao.CreateTraderUser(traderUser);
         }
         else

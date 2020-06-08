@@ -3,6 +3,7 @@ package com.sjtu.trade.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Data
@@ -10,7 +11,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @NoArgsConstructor
 @AllArgsConstructor
 public class TraderUser {
-    private Long id; // phone
+    @Id
+    private String phone; // phone
     private String traderName;
     private String password;
     private Long traderId;
@@ -23,12 +25,12 @@ public class TraderUser {
         this.traderId = traderId;
     }
 
-    public Long getId() {
-        return id;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public String getTraderName() {

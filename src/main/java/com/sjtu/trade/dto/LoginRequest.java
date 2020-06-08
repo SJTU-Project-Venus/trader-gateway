@@ -7,7 +7,7 @@ import lombok.Data;
 @Data
 public class LoginRequest extends Request implements Serializable {
   private String password;
-  private Long phone;
+  private String phone;
 
   public String getPassword() {
     return password;
@@ -17,11 +17,11 @@ public class LoginRequest extends Request implements Serializable {
     this.password = password;
   }
 
-  public Long getPhone() {
+  public String getPhone() {
     return phone;
   }
 
-  public void setPhone(Long phone) {
+  public void setPhone(String phone) {
     this.phone = phone;
   }
 }

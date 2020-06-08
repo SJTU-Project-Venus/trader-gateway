@@ -24,11 +24,6 @@ public class TraderUserController {
 
   @Autowired
   private TraderUserService traderUserService;
-  @ApiOperation(value = "用户登录", notes = "通过用户账号密码进行登录")
-  @RequestMapping(value = "/login", method = { RequestMethod.POST, RequestMethod.OPTIONS }, produces = "application/json;charset=UTF-8")
-  public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
-    return ResponseEntity.status(HttpStatus.OK).body(traderUserService.Login(loginRequest));
-  }
 
   @RequestMapping(value = "/register", method = { RequestMethod.POST, RequestMethod.OPTIONS }, produces = "application/json;charset=UTF-8")
   public ResponseEntity<?> exceptionURL(@RequestBody TraderUser traderUser) {
