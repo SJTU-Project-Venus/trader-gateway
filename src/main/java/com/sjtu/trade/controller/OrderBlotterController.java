@@ -1,8 +1,6 @@
 package com.sjtu.trade.controller;
 
-import com.sjtu.trade.dto.LoginRequest;
-import com.sjtu.trade.dto.NameDTO;
-import com.sjtu.trade.dto.OrderBlotterDTO;
+import com.sjtu.trade.dto.*;
 import com.sjtu.trade.serviceimpl.OrderBlotterService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.http.HttpStatus;
@@ -28,15 +26,16 @@ public class OrderBlotterController {
     @MessageMapping("/orderBlotter")
     @SendToUser("/topic/orderBlotter")
     public String greeting(OrderBlotterDTO message, Principal principal) throws Exception {
-        System.out.print("Received greeting message "+ message.getFutureId() +" from "+principal.getName());
-        orderBlotterService.addUsers(new NameDTO(principal.getName(),message.getFutureId()));
+        System.out.print("Received greeting message "+ message.getFutureName() +" from "+principal.getName());
+        orderBlotterService.addUsers(new NameDTO(principal.getName(),message.getFutureName()));
         Thread.sleep(1000); // simulated delay
-        return "Hello, " + HtmlUtils.htmlEscape(message.getFutureId().toString()) + "!";
+        return "Hello, " + HtmlUtils.htmlEscape(message.getFutureName()) + "!";
     }
-    @ApiOperation(value = "用户的历史交易", notes = "通过用户账号密码进行登录")
-    @RequestMapping(value = "/user/{id}", method = { RequestMethod.GET, RequestMethod.OPTIONS }, produces = "application/json;charset=UTF-8")
-    public ResponseEntity<?> login(@PathVariable Long id) {
-        return ResponseEntity.status(HttpStatus.OK).body(orderBlotterService.findByUserId(id));
+
+    @ApiOperation(value = "用户查看历史的orderBlotter")
+    @RequestMapping(value = "/orderBlotter/history/{name}", method = { RequestMethod.GET, RequestMethod.OPTIONS }, produces = "application/json;charset=UTF-8")
+    public ResponseEntity<?> greeting(@PathVariable("name")String name){
+        return ResponseEntity.status(HttpStatus.OK).body(orderBlotterService.historyOrderBlotters(name));
     }
 
 }

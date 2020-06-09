@@ -35,6 +35,7 @@ public class OrderSendService {
                 Thread.sleep(60 * 1000);
 
                 MarketOrderDTO marketOrder = new MarketOrderDTO();
+                marketOrder.setTraderDetailName(order.getTraderName());
                 marketOrder.setFutureName(order.getFutureName());
                 marketOrder.setOtherId(order.getId().toString());
                 if (order.getSide() == SideType.BUY)
@@ -43,7 +44,7 @@ public class OrderSendService {
                     marketOrder.setSide("SELLER");
 
                 marketOrder.setTotalCount(step);
-                marketOrder.setTraderName(order.getTraderName());
+                marketOrder.setTraderName(order.getTraderCompany());
 
                 restTemplate.postForObject(url, marketOrder, JSONObject.class);
             }
@@ -51,6 +52,7 @@ public class OrderSendService {
                 Thread.sleep(60 * 1000);
 
                 MarketOrderDTO marketOrder = new MarketOrderDTO();
+                marketOrder.setTraderDetailName(order.getTraderName());
                 marketOrder.setFutureName(order.getFutureName());
                 marketOrder.setOtherId(order.getId().toString());
                 if (order.getSide() == SideType.BUY)
@@ -59,7 +61,7 @@ public class OrderSendService {
                     marketOrder.setSide("SELLER");
 
                 marketOrder.setTotalCount(totalNumber-currentSent);
-                marketOrder.setTraderName(order.getTraderName());
+                marketOrder.setTraderName(order.getTraderCompany());
 
                 restTemplate.postForObject(url, marketOrder, JSONObject.class);
             }
@@ -81,6 +83,7 @@ public class OrderSendService {
 
         cancelOrder.setFutureName(order.getFutureName());
         cancelOrder.setTargetId(order.getOrderId().toString());
+        cancelOrder.setTraderDetailName(order.getTraderName());
         Order order1 = orderRepository.findById(order.getOrderId()).get();
         switch (order1.getOrderType()){
             case MARKET:
@@ -121,6 +124,7 @@ public class OrderSendService {
 
                 StopOrderDTO stopOrder = new StopOrderDTO();
                 stopOrder.setFutureName(order.getFutureName());
+                stopOrder.setTraderDetailName(order.getTraderName());
                 stopOrder.setOtherId(order.getId().toString());
                 if (order.getSide() == SideType.BUY)
                     stopOrder.setSide("BUYER");
@@ -128,7 +132,7 @@ public class OrderSendService {
                     stopOrder.setSide("SELLER");
 
                 stopOrder.setTotalCount(step);
-                stopOrder.setTraderName(order.getTraderName());
+                stopOrder.setTraderName(order.getTraderCompany());
                 stopOrder.setUnitPrice(order.getUnitPrice());
 
                 stopOrder.setStopPrice(order.getStopPrice());
@@ -159,6 +163,7 @@ public class OrderSendService {
 
                 StopOrderDTO stopOrder = new StopOrderDTO();
                 stopOrder.setFutureName(order.getFutureName());
+                stopOrder.setTraderDetailName(order.getTraderName());
                 stopOrder.setOtherId(order.getId().toString());
                 if (order.getSide() == SideType.BUY)
                     stopOrder.setSide("BUYER");
@@ -166,7 +171,7 @@ public class OrderSendService {
                     stopOrder.setSide("SELLER");
 
                 stopOrder.setTotalCount(totalNumber-currentSent);
-                stopOrder.setTraderName(order.getTraderName());
+                stopOrder.setTraderName(order.getTraderCompany());
                 stopOrder.setUnitPrice(order.getUnitPrice());
 
                 stopOrder.setStopPrice(order.getStopPrice());
@@ -214,6 +219,7 @@ public class OrderSendService {
                 Thread.sleep(60 * 1000);
 
                 LimitOrderDTO limitOrder = new LimitOrderDTO();
+                limitOrder.setTraderDetailName(order.getTraderName());
                 limitOrder.setFutureName(order.getFutureName());
                 limitOrder.setOtherId(order.getId().toString());
                 if (order.getSide() == SideType.BUY)
@@ -222,7 +228,7 @@ public class OrderSendService {
                     limitOrder.setSide("SELLER");
 
                 limitOrder.setTotalCount(step);
-                limitOrder.setTraderName(order.getTraderName());
+                limitOrder.setTraderName(order.getTraderCompany());
                 limitOrder.setUnitPrice(order.getUnitPrice());
                 restTemplate.postForObject(url, limitOrder, JSONObject.class);
             }
@@ -230,6 +236,7 @@ public class OrderSendService {
                 Thread.sleep(60 * 1000);
 
                 LimitOrderDTO limitOrder = new LimitOrderDTO();
+                limitOrder.setTraderDetailName(order.getTraderName());
                 limitOrder.setFutureName(order.getFutureName());
                 limitOrder.setOtherId(order.getId().toString());
                 if (order.getSide() == SideType.BUY)
@@ -238,7 +245,7 @@ public class OrderSendService {
                     limitOrder.setSide("SELLER");
 
                 limitOrder.setTotalCount(totalNumber-currentSent);
-                limitOrder.setTraderName(order.getTraderName());
+                limitOrder.setTraderName(order.getTraderCompany());
                 limitOrder.setUnitPrice(order.getUnitPrice());
                 restTemplate.postForObject(url, limitOrder, JSONObject.class);
             }

@@ -20,23 +20,20 @@ import java.security.Principal;
 @RequestMapping("/orderBook")
 public class OrderBookController {
 
-    @Autowired
-    private OrderBookService orderBookService;
+    private final OrderBookService orderBookService;
 
-    private final OrderBlotterService orderBlotterService;
-
-    OrderBookController(OrderBlotterService orderBlotterService) {
-        this.orderBlotterService = orderBlotterService;
+    OrderBookController(OrderBookService orderBookService) {
+        this.orderBookService = orderBookService;
     }
 
     @ApiOperation(value = "用户查看Market Depth")
     @MessageMapping("/orderBook")
     @SendToUser("/topic/orderBook")
     public String greeting(OrderBlotterDTO message, Principal principal) throws Exception {
-        System.out.print("Received greeting message "+ message.getFutureId() +" from "+principal.getName());
-        orderBlotterService.addUsers(new NameDTO(principal.getName(),message.getFutureId()));
+        System.out.print("Received greeting message "+ message.getFutureName() +" from "+principal.getName());
+        orderBookService.addUsers(new NameDTO(principal.getName(),message.getFutureName()));
         Thread.sleep(1000); // simulated delay
-        return "Hello, " + HtmlUtils.htmlEscape(message.getFutureId().toString()) + "!";
+        return "Hello, " + HtmlUtils.htmlEscape(message.getFutureName()) + "!";
     }
 
 }

@@ -8,6 +8,16 @@ public class MarketOrderDTO implements Serializable {
     private String side;
     private int totalCount;
     private String traderName;
+    private String traderDetailName;
+
+    public String getTraderDetailName() {
+        return traderDetailName;
+    }
+
+    public void setTraderDetailName(String traderDetailName) {
+        this.traderDetailName = traderDetailName;
+    }
+
     public String getFutureName() {
         return futureName;
     }

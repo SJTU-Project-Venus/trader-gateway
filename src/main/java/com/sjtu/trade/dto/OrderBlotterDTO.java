@@ -1,13 +1,13 @@
 package com.sjtu.trade.dto;
 
 public class OrderBlotterDTO {
-    private Long futureId;
+    private String futureName;
 
-    public Long getFutureId() {
-        return futureId;
+    public String getFutureName() {
+        return futureName;
     }
 
-    public void setFutureId(Long futureId) {
-        this.futureId = futureId;
+    public void setFutureName(String futureName) {
+        this.futureName = futureName;
     }
 }

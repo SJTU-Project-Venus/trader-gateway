@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface OrderBlotterDao {
     List<OrderBlotter> AllOrderBlotters();
+    List<OrderBlotter> HistoryUsername(String name);
+    boolean Create(OrderBlotter orderBlotter);
 }

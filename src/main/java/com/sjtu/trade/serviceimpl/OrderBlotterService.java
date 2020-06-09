@@ -1,5 +1,6 @@
 package com.sjtu.trade.serviceimpl;
 
+import com.sjtu.trade.dao.OrderBlotterDao;
 import com.sjtu.trade.dto.NameDTO;
 import com.sjtu.trade.entity.OrderBlotter;
 import com.sjtu.trade.repository.OrderBlotterRepository;
@@ -14,7 +15,7 @@ import java.util.List;
 public class OrderBlotterService  {
 
     @Autowired
-    private OrderBlotterRepository orderBlotterRepository;
+    private OrderBlotterDao orderBlotterDao;
     private final SimpMessagingTemplate simpMessagingTemplate;
     private static final String WS_MESSAGE_TRABSFER_DESTINATION = "/topic/orderBlotter";
     private List<NameDTO> userNames = new ArrayList<>();
@@ -24,15 +25,18 @@ public class OrderBlotterService  {
     }
 
     public void sendMessages(){
-       for(NameDTO nameDTO:userNames){
-           simpMessagingTemplate.convertAndSendToUser(nameDTO.getSessionId(),WS_MESSAGE_TRABSFER_DESTINATION,new OrderBlotter());
-       }
+        for(NameDTO nameDTO:userNames){
+            simpMessagingTemplate.convertAndSendToUser(nameDTO.getSessionId(),WS_MESSAGE_TRABSFER_DESTINATION,new OrderBlotter());
+        }
     }
     public void addUsers(NameDTO nameDTO){
         userNames.add(nameDTO);
     }
 
+    public List<OrderBlotter> historyOrderBlotters(String name){
+        return orderBlotterDao.HistoryUsername(name);
+    }
     public List<OrderBlotter> findByUserId(Long id){
-        return orderBlotterRepository.findByInitiatorId(id);
+        return new ArrayList<>();
     }
 }

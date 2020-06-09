@@ -6,6 +6,8 @@ import com.sjtu.trade.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class OrderServiceImpl implements OrderService {
     @Autowired
@@ -17,6 +19,16 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public  boolean CreateOrder(Order order){
         return orderDao.Create(order);
+    }
+
+    @Override
+    public List<Order> PendingOrder(String traderName){
+        return orderDao.findByUserPendingOrder(traderName);
+    }
+
+    @Override
+    public List<Order> HistoryOrder(String traderName){
+        return orderDao.findByUserDoneOrder(traderName);
     }
 
 }

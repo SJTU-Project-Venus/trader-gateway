@@ -4,6 +4,15 @@ public class CancelOrderDTO {
     private String futureName;
     private String targetId;
     private String targetType;
+    private String traderDetailName;
+
+    public String getTraderDetailName() {
+        return traderDetailName;
+    }
+
+    public void setTraderDetailName(String traderDetailName) {
+        this.traderDetailName = traderDetailName;
+    }
 
     public String getFutureName() {
         return futureName;

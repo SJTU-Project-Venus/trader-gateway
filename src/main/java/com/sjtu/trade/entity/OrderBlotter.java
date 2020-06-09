@@ -1,99 +1,127 @@
 package com.sjtu.trade.entity;
 
 import com.sjtu.trade.utils.SideType;
+import org.springframework.data.annotation.Id;
 
 public class OrderBlotter {
 
-    private Long id;
-    private String brokerName;
-    private Long futureId;
-    private String traderType = "Swap";
-    private double price;
-    private int number;
+    @Id
+    private String id;
+    private int count;
+    private int price;
+    private String creationTime;
+    private String buyerTraderName;
+    private String sellerTraderName;
+    private String buyerOrderId;
+    private String sellerOrderId;
+    private String marketDepthId;
+    private String buyerTraderDetailName;
+    private String sellerTraderDetailName;
+    private String buyerOtherId;
+    private String sellerOtherId;
 
-    private Long initiatorId;
-    private SideType initiatorSide;
 
-    private Long completionId;
-    private SideType completionSide;
+    public String getBuyerOtherId() {
+        return buyerOtherId;
+    }
 
-    public Long getId() {
+    public void setBuyerOtherId(String buyerOtherId) {
+        this.buyerOtherId = buyerOtherId;
+    }
+
+    public String getSellerOtherId() {
+        return sellerOtherId;
+    }
+
+    public void setSellerOtherId(String sellerOtherId) {
+        this.sellerOtherId = sellerOtherId;
+    }
+
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public String getBrokerName() {
-        return brokerName;
+    public int getCount() {
+        return count;
     }
 
-    public void setBrokerName(String brokerName) {
-        this.brokerName = brokerName;
+    public void setCount(int count) {
+        this.count = count;
     }
 
-    public Long getFutureId() {
-        return futureId;
-    }
-
-    public void setFutureId(Long futureId) {
-        this.futureId = futureId;
-    }
-
-    public String getTraderType() {
-        return traderType;
-    }
-
-    public void setTraderType(String traderType) {
-        this.traderType = traderType;
-    }
-
-    public double getPrice() {
+    public int getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 
-    public int getNumber() {
-        return number;
+    public String getCreationTime() {
+        return creationTime;
     }
 
-    public void setNumber(int number) {
-        this.number = number;
+    public void setCreationTime(String creationTime) {
+        this.creationTime = creationTime;
     }
 
-    public Long getInitiatorId() {
-        return initiatorId;
+    public String getBuyerTraderName() {
+        return buyerTraderName;
     }
 
-    public void setInitiatorId(Long initiatorId) {
-        this.initiatorId = initiatorId;
+    public void setBuyerTraderName(String buyerTraderName) {
+        this.buyerTraderName = buyerTraderName;
     }
 
-    public SideType getInitiatorSide() {
-        return initiatorSide;
+    public String getSellerTraderName() {
+        return sellerTraderName;
     }
 
-    public void setInitiatorSide(SideType initiatorSide) {
-        this.initiatorSide = initiatorSide;
+    public void setSellerTraderName(String sellerTraderName) {
+        this.sellerTraderName = sellerTraderName;
     }
 
-    public Long getCompletionId() {
-        return completionId;
+    public String getBuyerOrderId() {
+        return buyerOrderId;
     }
 
-    public void setCompletionId(Long completionId) {
-        this.completionId = completionId;
+    public void setBuyerOrderId(String buyerOrderId) {
+        this.buyerOrderId = buyerOrderId;
     }
 
-    public SideType getCompletionSide() {
-        return completionSide;
+    public String getSellerOrderId() {
+        return sellerOrderId;
     }
 
-    public void setCompletionSide(SideType completionSide) {
-        this.completionSide = completionSide;
+    public void setSellerOrderId(String sellerOrderId) {
+        this.sellerOrderId = sellerOrderId;
+    }
+
+    public String getMarketDepthId() {
+        return marketDepthId;
+    }
+
+    public void setMarketDepthId(String marketDepthId) {
+        this.marketDepthId = marketDepthId;
+    }
+
+    public String getBuyerTraderDetailName() {
+        return buyerTraderDetailName;
+    }
+
+    public void setBuyerTraderDetailName(String buyerTraderDetailName) {
+        this.buyerTraderDetailName = buyerTraderDetailName;
+    }
+
+    public String getSellerTraderDetailName() {
+        return sellerTraderDetailName;
+    }
+
+    public void setSellerTraderDetailName(String sellerTraderDetailName) {
+        this.sellerTraderDetailName = sellerTraderDetailName;
     }
 }

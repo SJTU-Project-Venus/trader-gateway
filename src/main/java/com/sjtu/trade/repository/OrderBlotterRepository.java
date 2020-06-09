@@ -6,6 +6,6 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.List;
 
-public interface OrderBlotterRepository extends MongoRepository<OrderBlotter, Long> {
-     List<OrderBlotter> findByInitiatorId(Long id);
+public interface OrderBlotterRepository extends MongoRepository<OrderBlotter, String> {
+     List<OrderBlotter> findByBuyerTraderNameOrSellerTraderName(String name,String name1);
 }

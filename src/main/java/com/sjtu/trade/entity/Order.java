@@ -14,9 +14,11 @@ public class Order {
     @Id
     private  Long id;
     private OrderType orderType;
-    private String traderName;
+    private String traderName; // 交易员姓名
+    private String traderCompany; // 交易公司名称
     private String brokerName;
     private StatusType Status;
+    private int timestamp; // 发起时间
 
     // Market Order 所拥有的
     private SideType side;  // 买卖操作
@@ -41,6 +43,14 @@ public class Order {
     private double stopPrice; // price 达到这个值的时候会转化
     private OrderType targetType; // 转化的类型
 
+    public int getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(int timestamp) {
+        this.timestamp = timestamp;
+    }
+
     // Cancel Order
     private Long orderId; // 撤销订单的Id号。
     public StatusType getStatus() {
@@ -60,7 +70,13 @@ public class Order {
     }
 
 
+    public String getTraderCompany() {
+        return traderCompany;
+    }
 
+    public void setTraderCompany(String traderCompany) {
+        this.traderCompany = traderCompany;
+    }
 
     public OrderType getTargetType() {
         return targetType;

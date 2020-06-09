@@ -9,6 +9,15 @@ public class LimitOrderDTO implements Serializable {
     private int   totalCount;
     private String traderName;
     private double unitPrice;
+    private String traderDetailName;
+
+    public String getTraderDetailName() {
+        return traderDetailName;
+    }
+
+    public void setTraderDetailName(String traderDetailName) {
+        this.traderDetailName = traderDetailName;
+    }
 
     public String getFutureName() {
         return futureName;

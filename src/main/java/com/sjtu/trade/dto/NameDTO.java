@@ -2,7 +2,7 @@ package com.sjtu.trade.dto;
 
 public class NameDTO {
     private String SessionId="";
-    private Long futureId;
+    private String futureName;
 
     public String getSessionId() {
         return SessionId;
@@ -12,15 +12,16 @@ public class NameDTO {
         SessionId = sessionId;
     }
 
-    public Long getFutureId() {
-        return futureId;
+    public String getFutureName() {
+        return futureName;
     }
 
-    public void setFutureId(Long futureId) {
-        this.futureId = futureId;
+    public void setFutureName(String futureName) {
+        this.futureName = futureName;
     }
-    public NameDTO(String id,Long futureId){
-        this.futureId = futureId;
+
+    public NameDTO(String id, String futureId){
+        this.futureName = futureId;
         this.SessionId = id;
     }
 }

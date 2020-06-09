@@ -3,13 +3,17 @@ package com.sjtu.trade.serviceimpl;
 import com.sjtu.trade.dto.NameDTO;
 import com.sjtu.trade.entity.OrderBlotter;
 import com.sjtu.trade.entity.OrderBook;
+import com.sjtu.trade.repository.OrderBlotterRepository;
+import net.sf.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Service
+@Component("orderBookService")
 public class OrderBookService {
 
 
@@ -20,10 +24,24 @@ public class OrderBookService {
         this.simpMessagingTemplate = simpMessagingTemplate;
     }
 
-    public void sendMessages(){
-        for(NameDTO nameDTO:userNames){
-            simpMessagingTemplate.convertAndSendToUser(nameDTO.getSessionId(),WS_MESSAGE_TRABSFER_DESTINATION,new OrderBook());
+    public void sendMessages(String text){
+        try{
+            //System.out.println(text);
+            JSONObject object = JSONObject.fromObject(text);
+            String futureName = (String)object.get("futureName");
+            //System.out.println(futureName);
+            System.out.println(userNames.size());
+            for(NameDTO nameDTO:userNames){
+                System.out.println(nameDTO.getFutureName());
+                if(futureName.equals(nameDTO.getFutureName())){
+                    simpMessagingTemplate.convertAndSendToUser(nameDTO.getSessionId(),WS_MESSAGE_TRABSFER_DESTINATION,text);
+                    System.out.println(nameDTO.getFutureName());
+                }
+            }
+        }catch (Exception e){
+
         }
+
     }
 
     public void addUsers(NameDTO nameDTO){
