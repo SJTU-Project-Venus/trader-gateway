@@ -2,6 +2,7 @@ package com.sjtu.trade.entity;
 
 import com.sjtu.trade.utils.OrderType;
 import com.sjtu.trade.utils.SideType;
+import com.sjtu.trade.utils.StatusType;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -15,22 +16,50 @@ public class Order {
     private OrderType orderType;
     private String traderName;
     private String brokerName;
-
+    private StatusType Status;
 
     // Market Order 所拥有的
     private SideType side;  // 买卖操作
     private String futureName; // 期货类型
     private int number; // 数量
+    private double unitPrice; // 单价
+    private int pendingNumber; // 未交易的数量
 
-    // Limit Order  Stop Order 所拥有的
-   // 买卖操作采用 Market Order 的那个side
-    // 期货类型采用Market Order 的那个 futureId
+    // Limit Order
+    // 买卖操作采用 Market Order 的那个side
+    // 期货类型采用Market Order 的那个 futureName
     // 数量采用 Market Order 的那个 number
-    private double unitPrice; // 止损价格;
+    // 单价采用Market depth 的那个unitPrice
+    // 未交易的数量采用的是Market Order 的那个 pendingNumber;
 
-    private double stopPrice;
+    // Stop Order
+    // 买卖操作采用 Market Order 的那个side
+    // 期货类型采用Market Order 的那个 futureName
+    // 数量采用 Market Order 的那个 number
+    // 单价采用Market depth 的那个unitPrice
+    // 未交易的数量采用的是Market Order 的那个 pendingNumber;
+    private double stopPrice; // price 达到这个值的时候会转化
+    private OrderType targetType; // 转化的类型
 
-    private OrderType targetType;
+    // Cancel Order
+    private Long orderId; // 撤销订单的Id号。
+    public StatusType getStatus() {
+        return Status;
+    }
+
+    public void setStatus(StatusType status) {
+        Status = status;
+    }
+
+    public int getPendingNumber() {
+        return pendingNumber;
+    }
+
+    public void setPendingNumber(int pendingNumber) {
+        this.pendingNumber = pendingNumber;
+    }
+
+
 
 
     public OrderType getTargetType() {
@@ -57,8 +86,7 @@ public class Order {
         this.brokerName = brokerName;
     }
 
-    // Cancel Order
-    private Long orderId; // 撤销订单的Id号。
+
 
     public String getFutureName() {
         return futureName;
