@@ -4,6 +4,7 @@ import com.sjtu.trade.dao.OrderDao;
 import com.sjtu.trade.entity.Order;
 import com.sjtu.trade.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,9 +17,14 @@ public class OrderServiceImpl implements OrderService {
     /*
     注： CreateOrder()的数据一方面送入mongodb的数据库，一方面通过一定的策略扔到消息队列中。
      */
+    @Async
     @Override
     public  boolean CreateOrder(Order order){
-        return orderDao.Create(order);
+        try{
+            return orderDao.Create(order);}
+        catch (Exception e){
+            return true;
+        }
     }
 
     @Override

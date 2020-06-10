@@ -34,3 +34,5 @@ server:
   port: 8081
   tomcat:
     uri-encoding: UTF-8
+
+traderCompany: A

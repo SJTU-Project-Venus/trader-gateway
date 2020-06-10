@@ -1,11 +1,6 @@
 package com.sjtu.trade.entity;
 
-import com.sjtu.trade.utils.SideType;
-import org.springframework.data.annotation.Id;
-
-public class OrderBlotter {
-
-    @Id
+public class OrderBlotterEntity {
     private String id;
     private int count;
     private int price;
@@ -20,47 +15,13 @@ public class OrderBlotter {
     private String buyerOtherId;
     private String sellerOtherId;
     private String futureName;
-    private String brokerCompany;
 
-
-    public OrderBlotter(OrderBlotterEntity orderBlotterEntity,String brokerName){
-        this.id = orderBlotterEntity.getId();
-        this.count = orderBlotterEntity.getCount();
-        this.price = orderBlotterEntity.getPrice();
-        this.creationTime = orderBlotterEntity.getCreationTime();
-        this.buyerTraderName = orderBlotterEntity.getBuyerTraderName();
-        this.sellerTraderName = orderBlotterEntity.getSellerTraderName();
-        this.buyerOrderId = orderBlotterEntity.getBuyerOrderId();
-        this.sellerOrderId = orderBlotterEntity.getSellerOrderId();
-        this.marketDepthId = orderBlotterEntity.getMarketDepthId();
-        this.buyerTraderDetailName = orderBlotterEntity.getBuyerTraderDetailName();
-        this.sellerTraderDetailName = orderBlotterEntity.getSellerTraderDetailName();
-        this.buyerOtherId = orderBlotterEntity.getBuyerOtherId();
-        this.sellerOtherId = orderBlotterEntity.getSellerOtherId();
-        this.brokerCompany = brokerName;
-    }
-    public String getBrokerCompany() {
-        return brokerCompany;
+    public String getFutureName() {
+        return futureName;
     }
 
-    public void setBrokerCompany(String brokerCompany) {
-        this.brokerCompany = brokerCompany;
-    }
-
-    public String getBuyerOtherId() {
-        return buyerOtherId;
-    }
-
-    public void setBuyerOtherId(String buyerOtherId) {
-        this.buyerOtherId = buyerOtherId;
-    }
-
-    public String getSellerOtherId() {
-        return sellerOtherId;
-    }
-
-    public void setSellerOtherId(String sellerOtherId) {
-        this.sellerOtherId = sellerOtherId;
+    public void setFutureName(String futureName) {
+        this.futureName = futureName;
     }
 
     public String getId() {
@@ -151,11 +112,19 @@ public class OrderBlotter {
         this.sellerTraderDetailName = sellerTraderDetailName;
     }
 
-    public String getFutureName() {
-        return futureName;
+    public String getBuyerOtherId() {
+        return buyerOtherId;
     }
 
-    public void setFutureName(String futureName) {
-        this.futureName = futureName;
+    public void setBuyerOtherId(String buyerOtherId) {
+        this.buyerOtherId = buyerOtherId;
+    }
+
+    public String getSellerOtherId() {
+        return sellerOtherId;
+    }
+
+    public void setSellerOtherId(String sellerOtherId) {
+        this.sellerOtherId = sellerOtherId;
     }
 }

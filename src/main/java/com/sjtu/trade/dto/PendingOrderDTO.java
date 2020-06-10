@@ -7,13 +7,13 @@ public class PendingOrderDTO {
     private int number;  // 正在处理但是还未处理完的数量
     private String futureName; // 期货的名字
     private OrderType orderType; // 订单的类型
-    private int timestamp; // 订单发起的时间
+    private long timestamp; // 订单发起的时间
 
-    public int getTimestamp() {
+    public long getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(int timestamp) {
+    public void setTimestamp(long timestamp) {
         this.timestamp = timestamp;
     }
 

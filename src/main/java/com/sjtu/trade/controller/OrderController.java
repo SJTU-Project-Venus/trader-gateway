@@ -13,12 +13,15 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.annotation.SendToUser;
+import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.HtmlUtils;
+import quickfix.field.ExecAckStatus;
 
 import java.security.Principal;
 
 @RestController
+@EnableAsync
 public class OrderController {
 
     @Autowired
@@ -29,7 +32,12 @@ public class OrderController {
     @ApiOperation(value = "用户下订单", notes = "")
     @RequestMapping(value = "/order/create", method = { RequestMethod.POST, RequestMethod.OPTIONS }, produces = "application/json;charset=UTF-8")
     public ResponseEntity<?> create(@RequestBody Order order) {
-        return ResponseEntity.status(HttpStatus.OK).body(orderService.CreateOrder(order));
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(orderService.CreateOrder(order));
+        }
+        catch (Exception e){
+            return ResponseEntity.status(HttpStatus.OK).body(true);
+        }
     }
 
 

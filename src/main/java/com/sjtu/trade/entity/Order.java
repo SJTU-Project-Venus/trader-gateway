@@ -18,7 +18,7 @@ public class Order {
     private String traderCompany; // 交易公司名称
     private String brokerName;
     private StatusType Status;
-    private int timestamp; // 发起时间
+    private long timestamp; // 发起时间
 
     // Market Order 所拥有的
     private SideType side;  // 买卖操作
@@ -43,11 +43,11 @@ public class Order {
     private double stopPrice; // price 达到这个值的时候会转化
     private OrderType targetType; // 转化的类型
 
-    public int getTimestamp() {
+    public long getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(int timestamp) {
+    public void setTimestamp(long timestamp) {
         this.timestamp = timestamp;
     }
 
