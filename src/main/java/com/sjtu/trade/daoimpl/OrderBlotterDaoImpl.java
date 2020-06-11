@@ -46,7 +46,7 @@ public class OrderBlotterDaoImpl implements OrderBlotterDao {
             }
         }
         if(orderBlotter.getSellerTraderName().equals(traderCompany)){
-            Order order = orderRepository.findById(Long.parseLong(orderBlotter.getSellerOrderId())).get();
+            Order order = orderRepository.findById(Long.parseLong(orderBlotter.getSellerOtherId())).get();
 
             int done = orderBlotter.getCount();
             int pending = order.getPendingNumber();

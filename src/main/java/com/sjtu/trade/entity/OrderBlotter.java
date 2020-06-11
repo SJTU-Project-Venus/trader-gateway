@@ -38,6 +38,7 @@ public class OrderBlotter {
         this.buyerOtherId = orderBlotterEntity.getBuyerOtherId();
         this.sellerOtherId = orderBlotterEntity.getSellerOtherId();
         this.brokerCompany = brokerName;
+        this.futureName = orderBlotterEntity.getFutureName();
     }
     public String getBrokerCompany() {
         return brokerCompany;

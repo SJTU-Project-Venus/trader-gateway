@@ -23,7 +23,7 @@ import java.util.List;
 public class WebsocketClientService {
 
     // 服务端的IP和端口号
-    @Value("${tradeCompany}")
+    @Value("${traderCompany}")
     private String traderCompany;
     private static final String URL = "localhost:8090";
 
@@ -101,8 +101,9 @@ public class WebsocketClientService {
     }
 
     private void cacheManager(OrderBlotter orderBlotter){
-
+        System.out.println(orderBlotter.getFutureName());
         long cacheSize =  redisUtil.lGetListSize(orderBlotter.getFutureName());
+        System.out.println("cacheSize"+cacheSize);
         if(cacheSize>120){
             List<Object> resultlist =  redisUtil.lGet(orderBlotter.getFutureName(),0,-1);
             resultlist.add(com.alibaba.fastjson.JSONObject.toJSON(orderBlotter));
