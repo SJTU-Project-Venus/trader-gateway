@@ -115,7 +115,7 @@ public class WebsocketClientServiceN {
         System.out.println("cacheSize"+cacheSize);
         if(cacheSize>=120){
             redisUtil.lSet(orderBlotter.getFutureName(),com.alibaba.fastjson.JSONObject.toJSON(orderBlotter));
-            redisUtil.deleteValues(orderBlotter.getFutureName(),0,80);
+            redisUtil.deleteValues(orderBlotter.getFutureName(),0,30);
         }
         else{
             redisUtil.lSet(orderBlotter.getFutureName(),com.alibaba.fastjson.JSONObject.toJSON(orderBlotter));

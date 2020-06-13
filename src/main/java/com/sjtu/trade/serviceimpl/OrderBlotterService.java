@@ -33,14 +33,12 @@ public class OrderBlotterService  {
         for(NameDTO nameDTO:userNames){
             List<Object> templist = redisUtil.lGet(nameDTO.getFutureName(),0,-1);
             if(templist!=null){
-            Collections.reverse(templist);
-
             if(templist.size()<10){
 
                 simpMessagingTemplate.convertAndSendToUser(nameDTO.getSessionId(),WS_MESSAGE_TRABSFER_DESTINATION,templist);
             }
             else{
-                templist = templist.subList(0,10);
+                templist = templist.subList(0,20);
                 simpMessagingTemplate.convertAndSendToUser(nameDTO.getSessionId(),WS_MESSAGE_TRABSFER_DESTINATION,templist);
             }
         }
