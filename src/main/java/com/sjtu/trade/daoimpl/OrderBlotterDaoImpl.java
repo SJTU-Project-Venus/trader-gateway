@@ -29,7 +29,8 @@ public class OrderBlotterDaoImpl implements OrderBlotterDao {
 
     @Override
     public boolean Create(OrderBlotter orderBlotter){
-
+        try{
+            orderBlotterRepository.save(orderBlotter);
         if(orderBlotter.getBuyerTraderName().equals(traderCompany)){
             Order order = orderRepository.findById(Long.parseLong(orderBlotter.getBuyerOtherId())).get();
 
@@ -60,8 +61,11 @@ public class OrderBlotterDaoImpl implements OrderBlotterDao {
                 orderRepository.save(order);
             }
         }
-        orderBlotterRepository.save(orderBlotter);
-        return true;
+        return true;}
+        catch (Exception e){
+            System.out.println("orderBlotter Error");
+            return true;
+        }
     }
 
     @Override

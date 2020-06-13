@@ -55,6 +55,7 @@ public class OrderDaoImpl implements OrderDao {
     public boolean Create(Order order){
         order.setId(idService.generate("order"));
         order.setTimestamp(new Date().getTime());
+        orderRepository.save(order);
         switch (order.getOrderType()){
             case MARKET:{
                 orderSendService.TWAP_MARKET(order);
@@ -69,11 +70,11 @@ public class OrderDaoImpl implements OrderDao {
                 break;
             }
             case CANCEL:{
+                order.setStatus(StatusType.DONE);
                 orderSendService.TWAP_CANCEL(order);
                 break;
             }
         }
-        orderRepository.save(order);
         return true;
     }
 

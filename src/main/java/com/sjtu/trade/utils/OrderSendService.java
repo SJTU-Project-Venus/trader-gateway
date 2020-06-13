@@ -9,6 +9,7 @@ import com.sjtu.trade.entity.OrderSingle;
 import com.sjtu.trade.repository.OrderRepository;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
@@ -20,11 +21,21 @@ public class OrderSendService {
     @Autowired
     private OrderRepository orderRepository;
 
+    @Value("${brokerHttpN}")
+    private String URLN;
+
+    @Value("${brokerHttpM}")
+    private String URLM;
+
     @Async
     public void TWAP_MARKET(Order order) {
 
         RestTemplate restTemplate = new RestTemplate();
-        String url = "http://localhost:8080/marketOrders";
+        String url = "";
+        if(order.getBrokerName().equals("N"))
+            url = URLN+"/marketOrders";
+        else
+            url = URLM+"/marketOrders";
         try {
 
             //Thread.sleep(1000);
@@ -33,7 +44,7 @@ public class OrderSendService {
             int currentStep = 0;
             int step = totalNumber / (100);
             for (; currentStep < step; currentStep ++) {
-                Thread.sleep(1000);
+                Thread.sleep(100);
 
                 MarketOrderDTO marketOrder = new MarketOrderDTO();
                 marketOrder.setTraderDetailName(order.getTraderName());
@@ -49,10 +60,10 @@ public class OrderSendService {
                 marketOrder.setTraderName(order.getTraderCompany());
 
                 JSONObject result = restTemplate.postForObject(url, marketOrder, JSONObject.class);
-                System.out.println(result);
+                //System.out.println(result);
             }
             if(currentSent<totalNumber){
-                Thread.sleep(1000);
+                Thread.sleep(100);
 
                 MarketOrderDTO marketOrder = new MarketOrderDTO();
                 marketOrder.setTraderDetailName(order.getTraderName());
@@ -67,7 +78,7 @@ public class OrderSendService {
                 marketOrder.setTraderName(order.getTraderCompany());
 
                 JSONObject result = restTemplate.postForObject(url, marketOrder, JSONObject.class);
-                System.out.println(result);
+                //System.out.println(result);
             }
 
 
@@ -81,14 +92,19 @@ public class OrderSendService {
     public void TWAP_CANCEL(Order order) {
 
         RestTemplate restTemplate = new RestTemplate();
-        String url = "http://localhost:8080/cancelOrders";
-
+        String url = "";
+        if(order.getBrokerName().equals("N"))
+            url = URLN+"/cancelOrders";
+        else
+            url = URLM+"/cancelOrders";
         CancelOrderDTO cancelOrder = new CancelOrderDTO();
 
         cancelOrder.setFutureName(order.getFutureName());
         cancelOrder.setTargetId(order.getOrderId().toString());
         cancelOrder.setTraderDetailName(order.getTraderName());
         Order order1 = orderRepository.findById(order.getOrderId()).get();
+        order1.setStatus(StatusType.DONE);
+        orderRepository.save(order1);
         switch (order1.getOrderType()){
             case MARKET:
                 {
@@ -109,7 +125,7 @@ public class OrderSendService {
             }
         }
         JSONObject result = restTemplate.postForObject(url,cancelOrder,JSONObject.class);
-        System.out.println(result);
+        //System.out.println(result);
 
     }
 
@@ -117,7 +133,11 @@ public class OrderSendService {
     public void TWAP_STOP(Order order) {
 
         RestTemplate restTemplate = new RestTemplate();
-        String url = "http://localhost:8080/stopOrders";
+        String url = "";
+        if(order.getBrokerName().equals("N"))
+            url = URLN+"/stopOrders";
+        else
+            url = URLM+"/stopOrders";
         try {
 
             //Thread.sleep(1000);
@@ -126,7 +146,7 @@ public class OrderSendService {
             int currentStep = 0;
             int step = totalNumber / (100);
             for (; currentStep < step; currentStep++) {
-                Thread.sleep(1000);
+                Thread.sleep(100);
 
                 StopOrderDTO stopOrder = new StopOrderDTO();
                 stopOrder.setFutureName(order.getFutureName());
@@ -164,10 +184,10 @@ public class OrderSendService {
                     }
                 }
                 JSONObject result = restTemplate.postForObject(url, stopOrder, JSONObject.class);
-                System.out.println(result);
+                //System.out.println(result);
             }
             if(currentSent<totalNumber){
-                Thread.sleep( 1000);
+                Thread.sleep( 100);
 
                 StopOrderDTO stopOrder = new StopOrderDTO();
                 stopOrder.setFutureName(order.getFutureName());
@@ -204,7 +224,7 @@ public class OrderSendService {
                     }
                 }
                 JSONObject result = restTemplate.postForObject(url, stopOrder, JSONObject.class);
-                System.out.println(result);
+                //System.out.println(result);
             }
 
 
@@ -217,7 +237,11 @@ public class OrderSendService {
     public void TWAP_LIMITTED(Order order) {
 
         RestTemplate restTemplate = new RestTemplate();
-        String url = "http://localhost:8080/limitOrders";
+        String url = "";
+        if(order.getBrokerName().equals("N"))
+            url = URLN+"/limitOrders";
+        else
+            url = URLM+"/limitOrders";
         try {
 
             //Thread.sleep(1000);
@@ -226,7 +250,7 @@ public class OrderSendService {
             int currentSent=0;
             int step = totalNumber / (100);
             for (; currentSend<step;currentSend++) {
-                Thread.sleep(10000);
+                Thread.sleep(100);
 
                 LimitOrderDTO limitOrder = new LimitOrderDTO();
                 limitOrder.setTraderDetailName(order.getTraderName());
@@ -242,10 +266,10 @@ public class OrderSendService {
                 limitOrder.setUnitPrice(order.getUnitPrice());
                 JSONObject result =  restTemplate.postForObject(url, limitOrder, JSONObject.class);
                 currentSent+=100;
-                System.out.println(result);
+                //System.out.println(result);
             }
             if(currentSent<totalNumber){
-                Thread.sleep(1000);
+                Thread.sleep(100);
 
                 LimitOrderDTO limitOrder = new LimitOrderDTO();
                 limitOrder.setTraderDetailName(order.getTraderName());
@@ -260,7 +284,7 @@ public class OrderSendService {
                 limitOrder.setTraderName(order.getTraderCompany());
                 limitOrder.setUnitPrice(order.getUnitPrice());
                 JSONObject result =  restTemplate.postForObject(url, limitOrder, JSONObject.class);
-                System.out.println(result);
+                //System.out.println(result);
             }
 
 

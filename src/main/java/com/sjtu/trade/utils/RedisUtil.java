@@ -521,18 +521,22 @@ public class RedisUtil {
 
     /**
      * 移除N个值为value
-     * @param key 键
-     * @param count 移除多少个
-     * @param value 值
+     * @param key 键值
+     * @param start 开始
+     * @param end 结束
      * @return 移除的个数
      */
-    public long lRemove(String key,long count,Object value) {
+    public void deleteValues(String key,long start,long end){
+        redisTemplate.opsForList().trim(key,start,end);
+    }
+    public void lRemoveAll(String key) {
         try {
-            Long remove = redisTemplate.opsForList().remove(key, count, value);
-            return remove;
+            boolean flag  = redisTemplate.delete(key);
+            System.out.println(flag);
+            return;
         } catch (Exception e) {
             e.printStackTrace();
-            return 0;
+            return;
         }
     }
 
