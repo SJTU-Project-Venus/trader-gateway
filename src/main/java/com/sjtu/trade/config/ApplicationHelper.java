@@ -20,21 +20,10 @@ public class ApplicationHelper implements ApplicationContextAware {
         return applicationContext;
     }
 
-    /**
-     * 通过类型获取bean
-     * @param clazz 类
-     * @param <T>
-     * @return bean
-     */
     public static <T> T getBean(Class<T> clazz){
         return getApplicationContext().getBean(clazz);
     }
 
-    /**
-     * 通过bean名称获取bean
-     * @param name 名称
-     * @return bean
-     */
     public static Object getBean(String name) {
         try {
             Object _restTemplate = getApplicationContext().getBean(name);
@@ -45,13 +34,6 @@ public class ApplicationHelper implements ApplicationContextAware {
         }
     }
 
-    /**
-     * 通过bean名称和类型获取bean
-     * @param name 名称
-     * @param clazz 类型
-     * @param <T>
-     * @return bean
-     */
     public static <T> T getBean(String name,Class<T> clazz){
         return getApplicationContext().getBean(name, clazz);
     }
