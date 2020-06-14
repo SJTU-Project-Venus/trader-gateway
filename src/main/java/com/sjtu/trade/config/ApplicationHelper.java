@@ -19,9 +19,26 @@ public class ApplicationHelper implements ApplicationContextAware {
         return applicationContext;
     }
 
-    public static Object getBean(String beanName) {
-//		System.out.println(applicationContext);
-        return applicationContext.getBean(beanName);
+    public static <T> T getBean(Class<T> clazz){
+        return getApplicationContext().getBean(clazz);
+    }
+
+    public static Object getBean(String name) {
+        try {
+            Object _restTemplate = getApplicationContext().getBean(name);
+            return _restTemplate;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static <T> T getBean(String name,Class<T> clazz){
+        return getApplicationContext().getBean(name, clazz);
+    }
+
+    public static void setApplicationContext1(ApplicationContext context) throws BeansException {
+        applicationContext = context;
     }
 
 }
