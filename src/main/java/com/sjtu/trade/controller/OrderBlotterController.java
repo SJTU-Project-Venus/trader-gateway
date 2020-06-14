@@ -35,7 +35,7 @@ public class OrderBlotterController {
     @ApiOperation(value = "用户查看历史的orderBlotter")
     @RequestMapping(value = "/orderBlotter/history/{name}", method = { RequestMethod.GET, RequestMethod.OPTIONS }, produces = "application/json;charset=UTF-8")
     public ResponseEntity<?> greeting(@PathVariable("name")String name){
-        return ResponseEntity.status(HttpStatus.OK).body(orderBlotterService.historyOrderBlotters(name));
+        return ResponseEntity.status(HttpStatus.OK).body(orderBlotterService.HistoryUsername(name));
     }
 
 }

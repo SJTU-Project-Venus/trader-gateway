@@ -1,7 +1,6 @@
 package com.sjtu.trade.serviceimpl;
 
 import com.sjtu.trade.config.ApplicationHelper;
-import com.sjtu.trade.dao.OrderBlotterDao;
 import com.sjtu.trade.entity.OrderBlotter;
 import com.sjtu.trade.entity.OrderBlotterEntity;
 import com.sjtu.trade.utils.RedisUtil;
@@ -13,7 +12,6 @@ import javax.annotation.PostConstruct;
 import javax.websocket.*;
 import java.io.IOException;
 import java.net.URI;
-import java.util.List;
 
 @Component
 @ClientEndpoint
@@ -25,7 +23,7 @@ public class WebsocketClientServiceN {
     @Value("${brokerWsN}")
     private String URL;
 
-    private OrderBlotterDao orderBlotterDao = (OrderBlotterDao)ApplicationHelper.getBean("orderBlotterDao");
+    private OrderBlotterService orderBlotterDao = (OrderBlotterService) ApplicationHelper.getBean("orderBlotterService");
     private OrderBookService orderBookService = (OrderBookService) ApplicationHelper.getBean("orderBookService");
     private RedisUtil redisUtil = (RedisUtil)ApplicationHelper.getBean("redisUtil");
     private Session session;

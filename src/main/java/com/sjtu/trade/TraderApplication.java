@@ -7,9 +7,9 @@ import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import java.util.TimeZone;
 
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = {"com.sjtu.trade.*"})
 @EnableScheduling
-@ComponentScan
+@ComponentScan("com.sjtu.trade.*")
 @EnableAsync
 public class TraderApplication {
 	public static void main(String[] args) {
