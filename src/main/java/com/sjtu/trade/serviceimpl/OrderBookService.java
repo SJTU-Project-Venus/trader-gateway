@@ -35,7 +35,7 @@ public class OrderBookService {
             for(NameDTO nameDTO:userNames){
                 System.out.println(nameDTO.getFutureName());
                 if(futureName.equals(nameDTO.getFutureName())){
-                    simpMessagingTemplate.convertAndSendToUser(nameDTO.getSessionId(),WS_MESSAGE_TRABSFER_DESTINATION,text);
+                    simpMessagingTemplate.convertAndSendToUser(nameDTO.getSessionId(),WS_MESSAGE_TRABSFER_DESTINATION,object);
                     System.out.println(nameDTO.getFutureName());
                 }
             }
