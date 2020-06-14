@@ -28,7 +28,7 @@ public class OrderBlotterDaoImpl implements OrderBlotterDao {
     }
 
     @Override
-    public boolean Create(OrderBlotter orderBlotter){
+    public synchronized boolean Create(OrderBlotter orderBlotter){
         try{
             orderBlotterRepository.save(orderBlotter);
         if(orderBlotter.getBuyerTraderName().equals(traderCompany)){
