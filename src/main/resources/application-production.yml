@@ -31,7 +31,7 @@ spring:
     initial-size: 5
 
 server:
-  port: 8083
+  port: 8080
   tomcat:
     uri-encoding: UTF-8
 
