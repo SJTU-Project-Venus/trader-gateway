@@ -78,7 +78,7 @@ public class WebsocketClientServiceM {
         String futureName = (String)object.get("futureName");
 
         if(futureName!=null) {
-            orderBookService.sendMessages(text);
+            orderBookService.sendMessages("M",text);
         }
         else{
             JSONObject object1 = JSONObject.fromObject(text);

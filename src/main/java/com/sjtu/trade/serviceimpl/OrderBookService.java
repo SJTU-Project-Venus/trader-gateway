@@ -24,11 +24,12 @@ public class OrderBookService {
         this.simpMessagingTemplate = simpMessagingTemplate;
     }
 
-    public void sendMessages(String text){
+    public void sendMessages(String brokerName,String text){
         try{
             //System.out.println(text);
             JSONObject object = JSONObject.fromObject(text);
             String futureName = (String)object.get("futureName");
+            object.put("brokerName",brokerName);
             //System.out.println(futureName);
             System.out.println(userNames.size());
             for(NameDTO nameDTO:userNames){
