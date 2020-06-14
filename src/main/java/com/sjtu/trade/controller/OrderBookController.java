@@ -31,7 +31,7 @@ public class OrderBookController {
     @SendToUser("/topic/orderBook")
     public String greeting(OrderBlotterDTO message, Principal principal) throws Exception {
         System.out.print("Received greeting message "+ message.getFutureName() +" from "+principal.getName());
-        orderBookService.addUsers(new NameDTO(principal.getName(),message.getFutureName()));
+        orderBookService.addUsers(new NameDTO(principal.getName(),message.getFutureName(),message.getBrokerName()));
         Thread.sleep(1000); // simulated delay
         return "Hello, " + HtmlUtils.htmlEscape(message.getFutureName()) + "!";
     }

@@ -34,9 +34,9 @@ public class OrderBookService {
             //System.out.println(userNames.size());
             for(NameDTO nameDTO:userNames){
                 System.out.println(nameDTO.getFutureName());
-                if(futureName.equals(nameDTO.getFutureName())){
+                if(futureName.equals(nameDTO.getFutureName())&&(brokerName.equals(nameDTO.getBrokerName()))){
                     simpMessagingTemplate.convertAndSendToUser(nameDTO.getSessionId(),WS_MESSAGE_TRABSFER_DESTINATION,object);
-                    System.out.println(nameDTO.getFutureName());
+                    //System.out.println(nameDTO.getFutureName());
                 }
             }
         }catch (Exception e){
