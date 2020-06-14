@@ -2,12 +2,15 @@ package com.sjtu.trade.serviceimpl;
 
 import com.sjtu.trade.config.ApplicationHelper;
 import com.sjtu.trade.dao.OrderBlotterDao;
+import com.sjtu.trade.daoimpl.OrderBlotterDaoImpl;
 import com.sjtu.trade.entity.OrderBlotter;
 import com.sjtu.trade.entity.OrderBlotterEntity;
 import com.sjtu.trade.utils.RedisUtil;
 import net.sf.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import org.springframework.web.context.WebApplicationContext;
 
 import javax.annotation.PostConstruct;
 import javax.websocket.*;
@@ -18,6 +21,8 @@ import java.util.List;
 @Component
 @ClientEndpoint
 public class WebsocketClientServiceN {
+    @Autowired
+    WebApplicationContext applicationContext;
 
     // 服务端的IP和端口号
     @Value("${traderCompany}")
@@ -25,7 +30,7 @@ public class WebsocketClientServiceN {
     @Value("${brokerWsN}")
     private String URL;
 
-    private OrderBlotterDao orderBlotterDao = (OrderBlotterDao)ApplicationHelper.getBean("orderBlotterDao");
+    private OrderBlotterDao orderBlotterDao = (OrderBlotterDao)ApplicationHelper.getBean("OrderBlotterDao");
     private OrderBookService orderBookService = (OrderBookService) ApplicationHelper.getBean("orderBookService");
     private RedisUtil redisUtil = (RedisUtil)ApplicationHelper.getBean("redisUtil");
     private Session session;
