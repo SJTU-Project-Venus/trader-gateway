@@ -4,14 +4,13 @@ spring:
   output:
     ansi:
       enabled: always
-  # rabbitmq:
-  #   host: 127.0.0.1
-  #   port: 5672
-  #   username: guest
-  #   password: guest
   data:
     mongodb:
-      uri: mongodb://mongo:27017/otc
+      host: mongodb://mongodb-1592143854.traderone.svc.cluster.local
+      authentication-database: admin
+      username: root
+      password: 1lnBhOWge0
+      database: venus
   redis:
     host: localhost
     port: 6379
