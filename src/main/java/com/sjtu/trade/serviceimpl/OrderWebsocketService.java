@@ -36,6 +36,7 @@ public class OrderWebsocketService {
                         pendingOrderDTO.setTimestamp(order.getTimestamp());
                         pendingOrderDTO.setOrderType(order.getOrderType());
                         pendingOrderDTO.setOrderId(order.getId());
+                        pendingOrderDTO.setBrokerName(order.getBrokerName());
                         resultList.add(pendingOrderDTO);
                     }
                     simpMessagingTemplate.convertAndSendToUser(nameDTO.getSessionId(),WS_MESSAGE_TRABSFER_DESTINATION,resultList);

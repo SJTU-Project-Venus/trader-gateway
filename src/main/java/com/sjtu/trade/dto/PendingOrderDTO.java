@@ -8,6 +8,15 @@ public class PendingOrderDTO {
     private String futureName; // 期货的名字
     private OrderType orderType; // 订单的类型
     private long timestamp; // 订单发起的时间
+    private String brokerName; // 中间商的名称
+
+    public String getBrokerName() {
+        return brokerName;
+    }
+
+    public void setBrokerName(String brokerName) {
+        this.brokerName = brokerName;
+    }
 
     public long getTimestamp() {
         return timestamp;

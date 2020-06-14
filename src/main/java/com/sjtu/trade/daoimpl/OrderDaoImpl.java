@@ -71,6 +71,7 @@ public class OrderDaoImpl implements OrderDao {
             }
             case CANCEL:{
                 order.setStatus(StatusType.DONE);
+                orderRepository.save(order);
                 orderSendService.TWAP_CANCEL(order);
                 break;
             }

@@ -41,39 +41,42 @@ public class OrderBlotterService  {
     public synchronized boolean Create(OrderBlotter orderBlotter){
         try{
             orderBlotterRepository.save(orderBlotter);
+            System.out.println(orderBlotter.getId());
             if(orderBlotter.getBuyerTraderName().equals(traderCompany)){
                 Order order = orderRepository.findById(Long.parseLong(orderBlotter.getBuyerOtherId())).get();
-
+                System.out.println("OrderId"+orderBlotter.getBuyerOtherId()+" "+orderBlotter.getSellerOtherId());
                 int done = orderBlotter.getCount();
                 int pending = order.getPendingNumber();
-                if(done == pending){
+                int currentCount = pending-done;
+                if(currentCount==0){
                     order.setPendingNumber(0);
                     order.setStatus(StatusType.DONE);
                     orderRepository.save(order);
                 }
                 else{
-                    order.setPendingNumber(pending-done);
+                    order.setPendingNumber(currentCount);
                     orderRepository.save(order);
                 }
             }
             if(orderBlotter.getSellerTraderName().equals(traderCompany)){
-                Order order = orderRepository.findById(Long.parseLong(orderBlotter.getSellerOtherId())).get();
-
+                Order order1 = orderRepository.findById(Long.parseLong(orderBlotter.getSellerOtherId())).get();
+                System.out.println("OrderId"+orderBlotter.getBuyerOtherId()+" "+orderBlotter.getSellerOtherId());
                 int done = orderBlotter.getCount();
-                int pending = order.getPendingNumber();
-                if(done == pending){
-                    order.setPendingNumber(0);
-                    order.setStatus(StatusType.DONE);
-                    orderRepository.save(order);
+                int pending = order1.getPendingNumber();
+                int currentCount = pending-done;
+                if(currentCount==0){
+                    order1.setPendingNumber(0);
+                    order1.setStatus(StatusType.DONE);
+                    orderRepository.save(order1);
                 }
                 else{
-                    order.setPendingNumber(pending-done);
-                    orderRepository.save(order);
+                    order1.setPendingNumber(currentCount);
+                    orderRepository.save(order1);
                 }
             }
             return true;}
         catch (Exception e){
-            System.out.println("orderBlotter Error");
+           // System.out.println("orderBlotter Error");
             return true;
         }
     }

@@ -31,7 +31,7 @@ public class OrderBookService {
             String futureName = (String)object.get("futureName");
             object.put("brokerName",brokerName);
             //System.out.println(futureName);
-            System.out.println(userNames.size());
+            //System.out.println(userNames.size());
             for(NameDTO nameDTO:userNames){
                 System.out.println(nameDTO.getFutureName());
                 if(futureName.equals(nameDTO.getFutureName())){

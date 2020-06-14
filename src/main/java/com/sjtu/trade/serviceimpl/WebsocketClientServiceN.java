@@ -80,7 +80,7 @@ public class WebsocketClientServiceN {
         else{
             JSONObject object1 = JSONObject.fromObject(text);
             String order = (String)object.get("order");
-            System.out.println(order);
+           // System.out.println(order);
             JSONObject object2 = JSONObject.fromObject(order);
 
             OrderBlotterEntity temp =  (OrderBlotterEntity) JSONObject.toBean(object2, OrderBlotterEntity.class);
@@ -110,7 +110,7 @@ public class WebsocketClientServiceN {
     private void cacheManager(OrderBlotter orderBlotter){
         System.out.println(orderBlotter.getFutureName());
         long cacheSize =  redisUtil.lGetListSize(orderBlotter.getFutureName());
-        System.out.println("cacheSize"+cacheSize);
+       // System.out.println("cacheSize"+cacheSize);
         if(cacheSize>=120){
             redisUtil.lSet(orderBlotter.getFutureName(),com.alibaba.fastjson.JSONObject.toJSON(orderBlotter));
             redisUtil.deleteValues(orderBlotter.getFutureName(),0,30);
