@@ -37,7 +37,7 @@ server:
 
 traderCompany: B
 
-brokerWsM: ws://broker-websocket-one.brokerone.svc.cluster.local:8080
-brokerWsN: ws://broker-websocket-two.brokertwo.svc.cluster.local:8080
+brokerWsM: broker-websocket-one.brokerone.svc.cluster.local:8080
+brokerWsN: broker-websocket-two.brokertwo.svc.cluster.local:8080
 brokerHttpM: http://broker-one.brokerone.svc.cluster.local:8080
 brokerHttpN: http://broker-two.brokertwo.svc.cluster.local:8080
