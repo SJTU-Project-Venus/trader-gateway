@@ -52,7 +52,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .requestMatchers().anyRequest()
             .and()
                 .authorizeRequests()
-                .antMatchers("/*").permitAll().and().authorizeRequests().antMatchers("/test/*").permitAll();
+                .antMatchers("/*").permitAll().and().authorizeRequests().antMatchers("/*").permitAll();
         // @formatter:on
     }
     @Bean
