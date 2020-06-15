@@ -23,8 +23,8 @@ steps:
       username: zhiyuanma0401
       password:
         from_secret: zhiyuanma0401
-      repo: registry-vpc.cn-hangzhou.aliyuncs.com/macoredroid/trader-gateway
-      registry: registry-vpc.cn-hangzhou.aliyuncs.com
+      repo: registry.cn-hangzhou.aliyuncs.com/macoredroid/trader-gateway
+      registry: registry.cn-hangzhou.aliyuncs.com
       tags:
         - v1.0.4
     when:
