@@ -6,7 +6,7 @@ spring:
       enabled: always
   data:
     mongodb:
-      uri: mongodb://mongodb-1592143854.traderone.svc.cluster.local/otc
+      uri: mongodb://mongodb-1592143854.traderone.svc.cluster.local:27017/otc
       authentication-database: admin
       username: root
       password: 1lnBhOWge0
@@ -39,4 +39,4 @@ traderCompany: B
 brokerWsM: ws://broker-websocket-one.brokerone:8080
 brokerWsN: ws://broker-websocket-two.brokertwo:8080
 brokerHttpM: http://broker-one.brokerone:8080
-brokerHttpN: http://broker-two.brokertwo:8080
+brokerttpN: http://broker-two.brokertwo:8080

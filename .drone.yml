@@ -20,10 +20,11 @@ steps:
   - name: docker
     image: plugins/docker
     settings:
-      username: wwwumr
+      username: zhiyuanma0401
       password:
-        from_secret: dockerhub_secrets
-      repo: wwwumr/trader-gateway
+        from_secret: zhiyuanma0401
+      repo: registry.cn-hangzhou.aliyuncs.com/macoredroid/trader-gateway
+      registry: registry.cn-hangzhou.aliyuncs.com
       tags:
         - v1.0.4
     when:
