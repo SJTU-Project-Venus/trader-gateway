@@ -39,6 +39,7 @@ services:
   - name: redis
     image: redis
 
+
 volumes:
   - name: maven-cache
     host:
