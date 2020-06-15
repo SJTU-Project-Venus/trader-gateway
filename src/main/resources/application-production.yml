@@ -10,7 +10,6 @@ spring:
       authentication-database: admin
       username: root
       password: 1lnBhOWge0
-      database: venus
   redis:
     host: localhost
     port: 6379
