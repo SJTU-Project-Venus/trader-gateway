@@ -6,7 +6,7 @@ spring:
       enabled: always
   data:
     mongodb:
-      host: mongodb://mongodb-1592143854.traderone.svc.cluster.local
+      uri: mongodb://mongodb-1592143854.traderone.svc.cluster.local/otc
       authentication-database: admin
       username: root
       password: 1lnBhOWge0
