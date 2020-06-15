@@ -36,7 +36,7 @@ server:
 
 traderCompany: B
 
-brokerWsM: ws://broker-websocket-one.brokerone:8080
-brokerWsN: ws://broker-websocket-two.brokertwo:8080
+brokerWsM: broker-websocket-one.brokerone:8080
+brokerWsN: broker-websocket-two.brokertwo:8080
 brokerHttpM: http://broker-one.brokerone:8080
 brokerHttpN: http://broker-two.brokertwo:8080
