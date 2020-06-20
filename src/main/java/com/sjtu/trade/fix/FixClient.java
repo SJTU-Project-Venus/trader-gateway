@@ -14,9 +14,7 @@ import java.io.InputStream;
 import java.util.List;
 
 /**
- * The type Fix client.
- * @author yanghuadong
- * @date 2019 -03-06
+ *
  */
 @Service
 public class FixClient {

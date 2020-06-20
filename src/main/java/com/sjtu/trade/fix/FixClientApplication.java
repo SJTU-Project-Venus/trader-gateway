@@ -21,8 +21,6 @@ import java.util.TreeSet;
 /**
  * The type Fix client application.
  *
- * @author yanghuadong
- * @date 2019 -03-13
  */
 @Service
 public class FixClientApplication extends MessageCracker implements Application {
